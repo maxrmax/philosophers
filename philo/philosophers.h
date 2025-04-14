@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:18:16 by mring             #+#    #+#             */
-/*   Updated: 2025/04/11 15:47:39 by mring            ###   ########.fr       */
+/*   Updated: 2025/04/14 16:54:05 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ typedef struct philo
 	int	eattime;
 	int	sleeptime;
 	int	deathtime;
+	int	philos;
+	int	meals;
 }		philo;
 
 int		ft_atoi(char *s);
-void	parse_pre_init(char **av);
+void	parse_pre_init(int ac, char **av, philo *philo);
 
 #endif

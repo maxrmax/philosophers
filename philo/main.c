@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:17:54 by mring             #+#    #+#             */
-/*   Updated: 2025/04/14 17:02:07 by mring            ###   ########.fr       */
+/*   Updated: 2025/04/15 14:18:48 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	parse_pre_init(int ac, char **av, philo *philo)
 	{
 		if (ft_atoi(av[ac]) == -1)
 		{
-			printf("Only numbers are allowed\n");
+			printf("Only positive numbers are allowed\n");
 			exit(1);
 		}
 		if (ac == 5)

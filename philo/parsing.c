@@ -6,11 +6,17 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:22:26 by mring             #+#    #+#             */
-/*   Updated: 2025/04/15 14:27:40 by mring            ###   ########.fr       */
+/*   Updated: 2025/04/22 16:11:21 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+void ft_atoi_error(void)
+{
+	printf("Error: Only positive whole numbers allowed (e.g. 123)\n");
+	exit(1);
+}
 
 int	ft_atoi(char *s)
 {
@@ -19,7 +25,7 @@ int	ft_atoi(char *s)
 	int	i;
 
 	if (!s)
-		return (1);
+		ft_atoi_error();
 	i = 0;
 	result = 0;
 	sign = 1;
@@ -28,11 +34,15 @@ int	ft_atoi(char *s)
 	if (s[i] == '+' && s[i + 1] != '-')
 		i++;
 	if (s[i] == '-')
-		return (-1);
+		ft_atoi_error();
 	while (s[i] >= '0' && s[i] <= '9')
-		result = (result * 10) + s[i++] - 48;
+	{
+		if (result > (2147483647 - (s[i] - '0')) / 10)
+			ft_atoi_error();
+		result = (result * 10) + s[i++] - '0';
+	}
 	if (!(s[i] >= '0' && s[i] <= '9') && !(s[i] == '\0'))
-		return (-1);
+		ft_atoi_error();
 	return (result * sign);
 }
 // 2147483647

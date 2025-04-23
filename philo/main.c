@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:17:54 by mring             #+#    #+#             */
-/*   Updated: 2025/04/15 14:18:48 by mring            ###   ########.fr       */
+/*   Updated: 2025/04/23 13:54:58 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,6 @@ void	parse_pre_init(int ac, char **av, philo *philo)
 		philo->meals = 0;
 	while (--ac >= 1)
 	{
-		if (ft_atoi(av[ac]) == -1)
-		{
-			printf("Only positive numbers are allowed\n");
-			exit(1);
-		}
 		if (ac == 5)
 			philo->meals = ft_atoi(av[5]);
 		else if (ac == 4)
@@ -46,7 +41,8 @@ void	parse_pre_init(int ac, char **av, philo *philo)
 
 void	init_philos(void)
 {
-	// init philos, forks, threads.
+	// init philos, threads, mutex.
+	
 }
 
 int	main(int ac, char **av)

@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:17:54 by mring             #+#    #+#             */
-/*   Updated: 2025/05/07 17:33:23 by mring            ###   ########.fr       */
+/*   Updated: 2025/05/08 14:53:48 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,29 +18,7 @@ void	error_exit(const char *error)
 	exit(EXIT_FAILURE);
 }
 
-void	parse_input(int ac, char **av, philo *philo)
-{
-	if (ac == 5)
-		philo->meals = 0;
-	else
-		philo->meals = ft_atoi(av[5]);
-	philo->sleeptime = ft_atoi(av[4]);
-	philo->eattime = ft_atoi(av[3]);
-	philo->deathtime = ft_atoi(av[2]);
-	philo->philo_nbr = ft_atoi(av[1]);
-	if (philo->deathtime < 60 || philo->eattime < 60 || philo->sleeptime < 60)
-		error_exit("Use timestamps larger than 60ms");
-	printf("philos: %d\n", philo->philo_nbr);
-	printf("death: %d\n", philo->deathtime);
-	printf("eat: %d\n", philo->eattime);
-	printf("sleep: %d\n", philo->sleeptime);
-	printf("meals: %d\n", philo->meals);
-	// we checked the input to be correct, then assigned it to each value
-	// the struct is initialized, if no meal amount was given,
-	// it should run indefinetly or until a philo dies
-}
-
-void	data_init(philo *philo)
+void	data_init(t_philo *philo)
 {
 	philo->end_sim = false;
 	philo->philos = safe_malloc(philo->philo_nbr);
@@ -48,12 +26,14 @@ void	data_init(philo *philo)
 
 int	main(int ac, char **av)
 {
-	philo	philo;
+	t_philo	philo;
 
 	if (ac == 5 || ac == 6)
 	{
 		parse_input(ac, av, &philo);
 		data_init(&philo);
+		// table
+		// cleanup
 	}
 	else
 	{

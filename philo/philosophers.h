@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:18:16 by mring             #+#    #+#             */
-/*   Updated: 2025/05/05 15:36:44 by mring            ###   ########.fr       */
+/*   Updated: 2025/05/07 17:30:01 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 
+// make individal struct for the table
+// else you pull memory for each philo for unnecessary variables
+// like sleeptime, deathtime, meals, eattime, philo_nbr, start_sim, end_sim
 typedef struct philo
 {
 	int				eattime;
@@ -42,5 +45,7 @@ void				error_exit(const char *error);
 int					ft_atoi(char *s);
 void				parse_input(int ac, char **av, philo *philo);
 void				*safe_malloc(size_t bytes);
+void				safe_thread_handler(pthread_t *thread, void *(*foo)(void *),
+						void *data, t_opcode opcode);
 
 #endif

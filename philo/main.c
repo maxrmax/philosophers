@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:17:54 by mring             #+#    #+#             */
-/*   Updated: 2025/05/11 16:31:32 by mring            ###   ########.fr       */
+/*   Updated: 2025/05/12 18:03:05 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,39 @@ void	error_exit(const char *error)
 	philo->philo_nbr	= ft_atoi(av[1]);
 */
 
+static void	assign_forks(t_philo *philo, t_fork *forks, int pos)
+{
+	int	philo_nbr;
+
+	// *philo_pos = philo_id -1
+	// left_fork = (philo_pos + 1) % philo_nbr
+	// (4 + 1) % 5 = 0
+	philo_nbr = philo->table->philo_nbr;
+	// potential deadlock
+	philo->left_fork = &forks[pos];
+	philo->right_fork = &forks[(pos + 1) % philo_nbr];
+	if (philo->id % 2 == 0)
+	{
+		philo->right_fork = &forks[pos];
+		philo->left_fork = &forks[(pos + 1) % philo_nbr];
+	}
+}
+
+static void	philo_init(t_philo *philo)
+{
+	int	i;
+
+	i = -1;
+	while (++i < philo->table->philo_nbr)
+	{
+		philo++;
+		philo->id = i + 1;
+		philo->full = false;
+		philo->meals_counter = 0;
+		assign_forks(philo, philo->forks, i);
+	}
+}
+
 // one time init at start:
 // end_sim
 // id
@@ -33,20 +66,32 @@ void	error_exit(const char *error)
 // threads,
 void	data_init(t_philo *philo)
 {
+	int	i;
+
+	i = -1;
 	philo->table->end_sim = false;
-	philo->table->end_sim = false;
-	philo->philos = safe_malloc(philo->table->philo_nbr);
+	philo->table->threads_ready = false;
+	philo->philos = safe_malloc(sizeof(t_philo) * philo->table->philo_nbr);
+	philo->forks = safe_malloc(sizeof(t_fork) * philo->table->philo_nbr);
+	while (++i < philo->table->philo_nbr)
+	{
+		pthread_mutex_init(&philo->forks[i].fork, NULL);
+		philo->forks[i].fork_id = i; // good for debugging
+	}
+	philo_init(philo);
 	error_exit("Success");
 }
 
 int	main(int ac, char **av)
 {
 	t_philo	philo;
+	t_table	table;
 
+	philo.table = &table;
 	if (ac == 5 || ac == 6)
 	{
 		parse_input(ac, av, &philo);
-		data_init(&philo);
+		// data_init(&philo);
 		// table
 		// cleanup
 	}

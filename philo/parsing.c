@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:22:26 by mring             #+#    #+#             */
-/*   Updated: 2025/05/09 12:21:34 by mring            ###   ########.fr       */
+/*   Updated: 2025/05/12 18:03:14 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_atoi(char *s)
 void	parse_input(int ac, char **av, t_philo *philo)
 {
 	if (ac == 5)
-		philo->table->meals = 0;
+		philo->table->meals = -1;
 	else
 		philo->table->meals = ft_atoi(av[5]);
 	philo->table->sleeptime = ft_atoi(av[4]);
@@ -51,8 +51,8 @@ void	parse_input(int ac, char **av, t_philo *philo)
 	philo->table->deathtime = ft_atoi(av[2]);
 	philo->table->philo_nbr = ft_atoi(av[1]);
 	if (philo->table->deathtime < 60 || philo->table->eattime < 60
-		|| philo->table->sleeptime < 60)
-		error_exit("Use timestamps larger than 60ms");
+		|| philo->table->sleeptime < 60 || philo->table->meals == 0)
+		error_exit("Use timestamps larger than 60ms and meals larger than 0");
 	printf("philos: %d\n", philo->table->philo_nbr);
 	printf("death: %d\n", philo->table->deathtime);
 	printf("eat: %d\n", philo->table->eattime);

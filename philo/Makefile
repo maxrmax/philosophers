@@ -6,14 +6,14 @@
 #    By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/14 16:10:04 by mring             #+#    #+#              #
-#    Updated: 2025/05/05 16:25:20 by mring            ###   ########.fr        #
+#    Updated: 2025/05/12 17:46:38 by mring            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= philosophers
-CFLAGS		= -Wall -Wextra -Werror
+# CFLAGS		= -Wall -Wextra -Werror
 
-SRC			= main parsing safe_func
+SRC			= main parsing safe_func dinner
 SRCS		= $(addsuffix .c, $(SRC))
 
 OBJ_DIR		= obj

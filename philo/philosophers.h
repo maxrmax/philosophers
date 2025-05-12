@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:18:16 by mring             #+#    #+#             */
-/*   Updated: 2025/05/08 14:52:28 by mring            ###   ########.fr       */
+/*   Updated: 2025/05/09 12:20:29 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_philo
 	int meals_counter; // how many meals eaten?
 	bool full;         // if its full
 	int last_meal;     // time passed from last mean
+	int				*philos;
 	t_fork			*left_fork;
 	t_fork			*right_fork;
 	pthread_t thread_id; // a philo is a thread
@@ -58,9 +59,7 @@ typedef struct s_philo
 
 void				error_exit(const char *error);
 int					ft_atoi(char *s);
-void				parse_input(int ac, char **av, philo *philo);
+void				parse_input(int ac, char **av, t_philo *philo);
 void				*safe_malloc(size_t bytes);
-void				safe_thread_handler(pthread_t *thread, void *(*foo)(void *),
-						void *data, t_opcode opcode);
 
 #endif

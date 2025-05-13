@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 14:09:12 by mring             #+#    #+#             */
-/*   Updated: 2025/05/12 17:46:48 by mring            ###   ########.fr       */
+/*   Updated: 2025/05/13 16:13:11 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,18 @@ void	*dinner_sim(void *data)
 	return (NULL);
 }
 
-void	dinner_start(t_philo *philo)
+void	dinner_start(t_philo *philos, t_fork *forks)
 {
 	int	i;
 
 	i = -1;
-	if (philo->table->meals == 0)
+	if (philos->table->meals == 0)
 		return ;
-	else if (philo->table->philo_nbr)
+	else if (philos->table->philo_nbr)
 		;
 	else
-		while (++i < philo->table->philo_nbr)
-		{
-			pthread_create(&philo->philos[i].thread_id, NULL, dinner_sim,
-				&philo->philos[i]);
-		}
+		while (++i < philos->table->philo_nbr)
+			pthread_create(&philos[i].thread_id, NULL, dinner_sim, &philos[i]);
 	// now all threads are made
 	// set bool true for all ready
 }

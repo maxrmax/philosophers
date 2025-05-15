@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:22:26 by mring             #+#    #+#             */
-/*   Updated: 2025/05/13 11:15:01 by mring            ###   ########.fr       */
+/*   Updated: 2025/05/15 12:06:28 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,26 +40,17 @@ int	ft_atoi(char *s)
 	return (result * sign);
 }
 
-void	parse_input(int ac, char **av, t_philo *philo)
+void	parse_input(int ac, char **av, t_table *table)
 {
 	if (ac == 5)
-		philo->table->meals = -1;
+		table->meals = -1;
 	else
-		philo->table->meals = ft_atoi(av[5]);
-	philo->table->sleeptime = ft_atoi(av[4]);
-	philo->table->eattime = ft_atoi(av[3]);
-	philo->table->deathtime = ft_atoi(av[2]);
-	philo->table->philo_nbr = ft_atoi(av[1]);
-	if (philo->table->deathtime < 60 || philo->table->eattime < 60
-		|| philo->table->sleeptime < 60 || philo->table->meals == 0
-		|| philo->table->philo_nbr <= 0)
+		table->meals = ft_atoi(av[5]);
+	table->sleeptime = ft_atoi(av[4]);
+	table->eattime = ft_atoi(av[3]);
+	table->deathtime = ft_atoi(av[2]);
+	table->philo_nbr = ft_atoi(av[1]);
+	if (table->deathtime < 60 || table->eattime < 60 || table->sleeptime < 60
+		|| table->meals == 0 || table->philo_nbr <= 0)
 		error_exit("Use timestamps larger than 60ms. Philo and meals larger than 0");
-	printf("philos: %d\n", philo->table->philo_nbr);
-	printf("death: %d\n", philo->table->deathtime);
-	printf("eat: %d\n", philo->table->eattime);
-	printf("sleep: %d\n", philo->table->sleeptime);
-	printf("meals: %d\n", philo->table->meals);
-	// we checked the input to be correct, then assigned it to each value
-	// the struct is initialized, if no meal amount was given,
-	// it should run indefinetly or until a philo dies
 }

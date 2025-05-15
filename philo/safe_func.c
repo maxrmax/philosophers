@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 14:31:26 by mring             #+#    #+#             */
-/*   Updated: 2025/05/09 12:22:21 by mring            ###   ########.fr       */
+/*   Updated: 2025/05/15 14:33:31 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,41 @@ Unperformant,
 	nutz die normalen pthread funktionen (lock unlock join detached etc)
 weil 200 philo sterben einfach wegen milisekunden
 */
+
+void	philo_debug(t_table *table)
+{
+	int	i;
+
+	i = -1;
+	printf("philos:			%d\n", table->philo_nbr);
+	printf("death:			%d\n", table->deathtime);
+	printf("eat:			%d\n", table->eattime);
+	printf("sleep:			%d\n", table->sleeptime);
+	printf("meals:			%d\n", table->meals);
+	printf("end_sim:		%d\n", table->end_sim);
+	printf("threads_ready:		%d\n", table->threads_ready);
+	while (++i < table->philo_nbr)
+		if (!(i + 1 < table->philo_nbr))
+			printf("last_fork_id (nbr - 1):	%d\n", table->forks[i].fork_id);
+	printf("full: 			%d\n", table->philos->full);
+	printf("meals_counter:		%d\n", table->philos->meals_counter);
+	i = -1;
+	while (++i < table->philo_nbr)
+	{
+		printf("philo_id:	%d\n", table->philos[i].id);
+		printf("first_fork: 		%p\n", table->philos[i].first_fork);
+		printf("second_fork: 		%p\n", table->philos[i].second_fork);
+	}
+	// not initialized at this point:
+	// start_sim
+	// last_meal
+}
+
+void	error_exit(const char *error)
+{
+	printf("%s\n", error);
+	exit(EXIT_FAILURE);
+}
 
 // wrapper for safe malloc usage
 void	*safe_malloc(size_t bytes)

@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:18:16 by mring             #+#    #+#             */
-/*   Updated: 2025/05/13 16:56:45 by mring            ###   ########.fr       */
+/*   Updated: 2025/05/15 14:44:02 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,32 @@
 # include <unistd.h>   // write, usleep
 // # include <limits.h> // INT_MAX
 
-typedef struct s_philo	t_philo;
-
 typedef struct s_fork
 {
-	pthread_mutex_t		fork;
-	int					fork_id;
-}						t_fork;
+	pthread_mutex_t	fork;
+	int				fork_id;
+}					t_fork;
 
+// philosophers are egoistic
+// they only know about themself, how many eals they have eaten
+// if they are full, last_meal time
+// their forks right and left of them
+// and every philo has their own ID and THREAD_ID
+typedef struct s_philo
+{
+	int id;            // philo individual id
+	int meals_counter; // how many meals eaten?
+	bool full;         // if its full
+	int last_meal;     // time passed from last mean
+	t_fork			*first_fork;
+	t_fork			*second_fork;
+	pthread_t thread_id; // a philo is a thread
+}					t_philo;
+
+// table is the master struct.
+// the table knows it all.
+// the table contains all forks
+// all philos sit on the table
 typedef struct s_table
 {
 	int sleeptime;      // time to sleep
@@ -39,34 +57,16 @@ typedef struct s_table
 	int start_sim;      // time stamp of sim start
 	bool end_sim;       // full or dead philos trigger end
 	bool threads_ready; // for synchronizing philos
-	t_philo				*philos;
-	t_fork				*forks;
-}						t_table;
+	t_philo			*philos;
+	t_fork			*forks;
+}					t_table;
 
-// make individal struct for the table
-// else you pull memory for each philo for unnecessary variables
-// like sleeptime, deathtime, meals, eattime,
-// philo_nbr, start_sim, end_sim
-// ./philo 10 410 200 200 [10]
-struct					s_philo
-{
-	int id;            // philo individual id
-	int meals_counter; // how many meals eaten?
-	bool full;         // if its full
-	int last_meal;     // time passed from last mean
-	// t_philo				*philos; // self reference, not good practice
-	t_fork				*left_fork;
-	t_fork				*right_fork;
-	pthread_t thread_id; // a philo is a thread
-	t_table *table;      // table struct
-							// t_fork *forks;       // fork struct
-};
-
-void					error_exit(const char *error);
-int						ft_atoi(char *s);
-void					parse_input(int ac, char **av, t_philo *philo);
-void					*safe_malloc(size_t bytes);
-void					data_init(t_philo *philo);
-void					dinner_start(t_philo *philo, t_fork *forks);
+void				error_exit(const char *error);
+int					ft_atoi(char *s);
+void				parse_input(int ac, char **av, t_table *table);
+void				*safe_malloc(size_t bytes);
+void				data_init(t_table *table);
+// void				dinner_start(t_table *table);
+void				philo_debug(t_table *table);
 
 #endif

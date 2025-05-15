@@ -6,14 +6,14 @@
 #    By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/14 16:10:04 by mring             #+#    #+#              #
-#    Updated: 2025/05/12 17:46:38 by mring            ###   ########.fr        #
+#    Updated: 2025/05/15 11:49:50 by mring            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= philosophers
-# CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -g -fsanitize=address
 
-SRC			= main parsing safe_func dinner
+SRC			= main parsing safe_func dinner init
 SRCS		= $(addsuffix .c, $(SRC))
 
 OBJ_DIR		= obj
@@ -28,7 +28,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)
 
 ${NAME}: 		$(OBJ_DIR) $(OBJS)
-				@$(CC) $(OBJS) -o $(NAME)
+				@$(CC) $(OBJS) $(CFLAGS) -o $(NAME)
 				@echo "/// compiled: $(NAME) ///"
 
 clean:

@@ -6,17 +6,11 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 14:31:26 by mring             #+#    #+#             */
-/*   Updated: 2025/05/15 14:33:31 by mring            ###   ########.fr       */
+/*   Updated: 2025/05/19 12:31:54 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
-/*
-Unperformant,
-	nutz die normalen pthread funktionen (lock unlock join detached etc)
-weil 200 philo sterben einfach wegen milisekunden
-*/
 
 void	philo_debug(t_table *table)
 {

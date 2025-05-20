@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:49:52 by mring             #+#    #+#             */
-/*   Updated: 2025/05/15 14:12:57 by mring            ###   ########.fr       */
+/*   Updated: 2025/05/20 16:35:38 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void	philo_init(t_table *table, t_fork *forks)
 		table->philos[i].id = i + 1;
 		table->philos[i].full = false;
 		table->philos[i].meals_counter = 0;
+		table->philos[i].table = table;
 		assign_forks(table, forks, i);
 	}
 }

@@ -6,11 +6,22 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:17:54 by mring             #+#    #+#             */
-/*   Updated: 2025/05/15 14:08:15 by mring            ###   ########.fr       */
+/*   Updated: 2025/05/20 17:50:20 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+static void	cleanup(t_table *table)
+{
+	int	i;
+
+	i = -1;
+	while (++i < table->philo_nbr)
+		pthread_mutex_destroy(&table->forks[i].fork);
+	free(table->philos);
+	free(table->forks);
+}
 
 int	main(int ac, char **av)
 {
@@ -20,10 +31,10 @@ int	main(int ac, char **av)
 	{
 		parse_input(ac, av, &table);
 		data_init(&table);
-		philo_debug(&table);
-		error_exit("Success");
-		// table
-		// cleanup
+		philo_debug(&table);	//	
+		dinner_start(&table);
+		cleanup(&table);
+		error_exit("Success");	//
 	}
 	else
 		error_exit("Usage: ./philo number_of_philos time_to_die time_to_eat time_to_sleep [meal_amount]");

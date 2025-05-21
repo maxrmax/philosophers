@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 14:31:26 by mring             #+#    #+#             */
-/*   Updated: 2025/05/19 12:31:54 by mring            ###   ########.fr       */
+/*   Updated: 2025/05/21 13:21:41 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	philo_debug(t_table *table)
 	// last_meal
 }
 
+// TODO: rewrite everything to handle returns, exit explicitly not allowed.
 void	error_exit(const char *error)
 {
 	printf("%s\n", error);

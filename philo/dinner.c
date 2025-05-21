@@ -6,29 +6,16 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 14:09:12 by mring             #+#    #+#             */
-/*   Updated: 2025/05/20 17:46:50 by mring            ###   ########.fr       */
+/*   Updated: 2025/05/21 16:06:09 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-static void	wait_all_threads(t_philo *philo)
-{
-	while (1)
-	{
-		pthread_mutex_lock(&philo->table->table_mtx);
-		if (philo->table->threads_ready)
-		{
-			pthread_mutex_unlock(&philo->table->table_mtx);
-			break ;
-		}
-		pthread_mutex_unlock(&philo->table->table_mtx);
-		usleep(1000);
-	}
-}
+static
 
-// do i need the full table data + every philo data here?
-void	*dinner_sim(void *data)
+	void *
+	dinner_sim(void *data)
 {
 	t_philo	*philo;
 
@@ -55,12 +42,11 @@ void	dinner_start(t_table *table)
 		pthread_detach(table->philos[i].thread_id);
 	}
 	table->sim_start = time_now(); // have to mutex table time for access later
-	table->threads_ready = true;
 	printf("time: %ld ---\n", table->sim_start);
+	table->threads_ready = true;
 	pthread_mutex_unlock(&table->table_mtx);
-	// table->end_sim = true; // ???
-	// table->threads_ready = true; // now they should all start in sync
-	// now all threads are made
-	// set bool true for all ready
-	sleep(2);
+	table->end_sim = true; // ???
+	// monitor loop for the mainthread here
+	monitor(table);
+	sleep(1);
 }

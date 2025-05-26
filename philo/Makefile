@@ -6,12 +6,12 @@
 #    By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/14 16:10:04 by mring             #+#    #+#              #
-#    Updated: 2025/05/21 15:53:14 by mring            ###   ########.fr        #
+#    Updated: 2025/05/25 15:20:10 by mring            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= philosophers
-CFLAGS		= -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS		= -Wall -Wextra -Werror -g #-fsanitize=address
 
 SRC			= main parsing safe_func dinner init utils monitor sync_utils getter_setter
 SRCS		= $(addsuffix .c, $(SRC))

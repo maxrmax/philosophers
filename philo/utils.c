@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:43:42 by mring             #+#    #+#             */
-/*   Updated: 2025/05/21 13:58:41 by mring            ###   ########.fr       */
+/*   Updated: 2025/05/26 21:27:28 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,23 @@ long	time_now(void)
 	return ((now.tv_sec * 1000) + (now.tv_usec / 1000));
 }
 
-// // exit strategies for usleep wrapper (death, timeout etc)
-// void	ph_usleep(long time, t_table *table)
-// {
-// 	long	start_time;
-// 	long	elapsed;
+// exit strategies for usleep wrapper (death, timeout etc)
+void	ph_usleep(long time, t_table *table)
+{
+	long	start_time;
+	long	elapsed;
 
-// 	start_time = time_now();
-// 	while (1)
-// 	{
-// 		if (sim_end(table)) // TODO: sim_end -> get table->end_sim bool (MUTEX)
-// 			return ;
-// 		usleep(1000);
-// 		elapsed = time_now() - start_time;
-// 		if (elapsed > time)
-// 			return ;
-// 	}
-// }
+	start_time = time_now();
+	while (1)
+	{
+		if (get_bool(&table->table_mtx, &table->end_sim))
+			return ;
+		usleep(1000);
+		elapsed = time_now() - start_time;
+		if (elapsed > time)
+			return ;
+	}
+}
 
 void	cleanup(t_table *table)
 {
@@ -48,4 +48,15 @@ void	cleanup(t_table *table)
 		pthread_mutex_destroy(&table->forks[i].fork);
 	free(table->philos);
 	free(table->forks);
+}
+
+void	write_philo_status(char *msg, t_philo *philo)
+{
+	long	time;
+
+	time = time_now() - philo->table->sim_start;
+	pthread_mutex_lock(&philo->table->table_mtx);
+	if (!philo->table->end_sim)
+		printf("%-6ld %d %s\n", time, philo->id, msg);
+	pthread_mutex_unlock(&philo->table->table_mtx);
 }

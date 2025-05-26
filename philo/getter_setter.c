@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:11:41 by mring             #+#    #+#             */
-/*   Updated: 2025/05/21 16:09:08 by mring            ###   ########.fr       */
+/*   Updated: 2025/05/26 22:07:21 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,11 @@ long	get_long(pthread_mutex_t *mutex, long *value)
 	ret = *value;
 	pthread_mutex_unlock(mutex);
 	return (ret);
+}
+
+void	increase_long(pthread_mutex_t *mutex, long *value)
+{
+	pthread_mutex_lock(mutex);
+	(*value)++;
+	pthread_mutex_unlock(mutex);
 }

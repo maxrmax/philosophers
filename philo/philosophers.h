@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:18:16 by mring             #+#    #+#             */
-/*   Updated: 2025/05/21 16:03:03 by mring            ###   ########.fr       */
+/*   Updated: 2025/05/26 22:07:27 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_philo
 	int id;            // philo individual id
 	int meals_counter; // how many meals eaten?
 	bool full;         // if its full
-	int last_meal;     // time passed from last mean
+	long last_meal;     // time passed from last mean
 	t_fork				*first_fork;
 	t_fork				*second_fork;
 	t_table				*table;
@@ -84,5 +84,9 @@ bool					get_bool(pthread_mutex_t *mutex, bool *value);
 void					set_long(pthread_mutex_t *mutex, long *dest,
 							long value);
 long					get_long(pthread_mutex_t *mutex, long *value);
+void	write_philo_status(char *msg, t_philo *philo);
+void	de_sync_philo(t_philo *philo);
+void	ph_usleep(long time, t_table *table);
+void	increase_long(pthread_mutex_t *mutex, long *value);
 
 #endif

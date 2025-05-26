@@ -6,62 +6,38 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 13:18:04 by mring             #+#    #+#             */
-/*   Updated: 2025/05/21 16:08:36 by mring            ###   ########.fr       */
+/*   Updated: 2025/05/26 22:18:15 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-// static bool	philo_death(t_philo *philo)
-// {
-// 	if (philo->table->deathtime > time_now() - philo->last_meal)
-// 		return (true); // 1
-// 	return (false);    // 0
-// }
+static bool	philo_death(t_philo *philo)
+{
+	if (philo->table->deathtime > time_now() - philo->last_meal)
+		return (false);
+	return (true);
+}
 
-// needs to check if a philo died,
 void	*monitor(void *data)
 {
 	t_table	*table;
 	int		i;
 
 	table = (t_table *)data;
-	/* thought process:
-	the monitor needs to check if the sim is finished
-	-> when is the sim finished?
-	when every philo ate [X] amount
-	when a philo died
-	-> what will i need for that?
-	a loop for every thread
-	check inside the loop if any philo died (sub) and if the sim is still going (sub?)
-	*/
-	// check how much was eaten by each philo
-	// check if philo died≠
-	//
-	;
-	printf("0\n");
-	sleep(1);
-	i = -1;
-	printf("bool1: %d\n", get_bool(&table->table_mtx, &table->end_sim));
-	while (get_bool(&table->table_mtx, &table->end_sim) && i++ < 5)
+	// check if the simulation is still running
+	while (!get_bool(&table->table_mtx, &table->end_sim))
 	{
-		printf("1\n");
-		// 	while (++i < table->philo_nbr)
-		// 	{
-		// 		if (philo_died(table->philos + i) && !sim_status(table))
-		// 		{
-		// 			// set sim_end true
-		// 			// print death status
-		// 			return (NULL);
-		// 		}
-		// 	}
-		if (true)
+		i = -1;
+		while (++i < table->philo_nbr)
 		{
-			printf("2\n");
-			set_bool(&table->table_mtx, &table->end_sim, false);
-			printf("bool2: %d\n", get_bool(&table->table_mtx, &table->end_sim));
+			if (philo_death(table->philos + i) && table->end_sim)
+			{
+				set_bool(&table->table_mtx, &table->end_sim, true);
+				printf("Philosopher %d died\n", table->philos[i].id);
+				return (NULL);
+			}
 		}
 	}
-	printf("3\n");
 	return (NULL);
 }

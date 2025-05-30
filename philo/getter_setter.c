@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:11:41 by mring             #+#    #+#             */
-/*   Updated: 2025/05/26 22:07:21 by mring            ###   ########.fr       */
+/*   Updated: 2025/05/29 23:05:18 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ long	get_long(pthread_mutex_t *mutex, long *value)
 	return (ret);
 }
 
+// TODO: check if necessary for -> dinner_sim()
 void	increase_long(pthread_mutex_t *mutex, long *value)
 {
 	pthread_mutex_lock(mutex);

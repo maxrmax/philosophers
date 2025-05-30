@@ -6,13 +6,13 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:22:26 by mring             #+#    #+#             */
-/*   Updated: 2025/05/21 13:19:14 by mring            ###   ########.fr       */
+/*   Updated: 2025/05/29 23:46:26 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-//TODO: rewrite into proper atoi without exit and pre/sub functions for handling cases
+// TODO: rewrite into proper atoi without exit and pre/sub functions for handling cases
 int	ft_atoi(char *s)
 {
 	int	result;
@@ -52,6 +52,6 @@ void	parse_input(int ac, char **av, t_table *table)
 	table->deathtime = ft_atoi(av[2]);
 	table->philo_nbr = ft_atoi(av[1]);
 	if (table->deathtime < 60 || table->eattime < 60 || table->sleeptime < 60
-		|| table->meals == 0 || table->philo_nbr <= 0)
-		error_exit("Use timestamps larger than 60ms. Philo and meals larger than 0");
+		|| table->philo_nbr <= 0)
+		error_exit("Use timestamps larger than 60ms and more than 0 philos");
 }

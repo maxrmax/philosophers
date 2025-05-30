@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 14:31:26 by mring             #+#    #+#             */
-/*   Updated: 2025/05/21 13:21:41 by mring            ###   ########.fr       */
+/*   Updated: 2025/05/30 00:15:25 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	philo_debug(t_table *table)
 	while (++i < table->philo_nbr)
 		if (!(i + 1 < table->philo_nbr))
 			printf("last_fork_id (nbr - 1):	%d\n", table->forks[i].fork_id);
-	printf("full: 			%d\n", table->philos->full);
+	// printf("full: 			%d\n", table->philos->full);
 	printf("meals_counter:		%d\n", table->philos->meals_counter);
 	i = -1;
 	while (++i < table->philo_nbr)
@@ -41,7 +41,7 @@ void	philo_debug(t_table *table)
 	// last_meal
 }
 
-// TODO: rewrite everything to handle returns, exit explicitly not allowed.
+// TODO (optional): rewrite everything to handle returns exit explicitly not allowed.
 void	error_exit(const char *error)
 {
 	printf("%s\n", error);

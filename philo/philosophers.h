@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:18:16 by mring             #+#    #+#             */
-/*   Updated: 2025/05/26 22:07:27 by mring            ###   ########.fr       */
+/*   Updated: 2025/05/30 00:13:48 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,31 +36,47 @@ typedef struct s_fork
 // and every philo has their own ID and THREAD_ID
 typedef struct s_philo
 {
-	int id;            // philo individual id
-	int meals_counter; // how many meals eaten?
-	bool full;         // if its full
-	long last_meal;     // time passed from last mean
+	// philo individual id
+	int					id;
+	// how many meals eaten?
+	int					meals_counter;
+	// time passed from last mean
+	long				last_meal;
 	t_fork				*first_fork;
 	t_fork				*second_fork;
 	t_table				*table;
-	pthread_t thread_id; // a philo is a thread
+	// thread_id per philo[i]
+	pthread_t			thread_id;
 	pthread_mutex_t		philo_mtx;
 }						t_philo;
 
-// table is the master struct.
-// the table knows it all.
-// the table contains all forks
-// all philos sit on the table
+// table is master
+// table knows all forks
+// table tolerates philos
+// table knows all
+// table sees all
+// all hail table
 struct					s_table
 {
-	int sleeptime;      // time to sleep
-	int deathtime;      // time until death without food
-	int eattime;        // time to eaten
-	int meals;          // amount of meals everyone needs
-	int philo_nbr;      // amount of philos
-	bool threads_ready; // for synchronizing philos
-	bool end_sim;       // full or dead philos trigger end
-	long sim_start;     // time stamp of sim start
+	// time to sleep
+	int					sleeptime;
+	// time until death without food
+	int					deathtime;
+	// time to eaten
+	int					eattime;
+	// amount of meals everyone needs
+	int					meals;
+	//  if all philos are full
+	int					full_counter;
+	bool				all_full;
+	// amount of philos
+	int					philo_nbr;
+	// for synchronizing philos
+	bool				threads_ready;
+	// time stamp of sim start
+	long				sim_start;
+	// full or dead philos trigger end
+	bool				end_sim;
 	pthread_mutex_t		table_mtx;
 	pthread_t			monitor;
 	t_philo				*philos;
@@ -84,9 +100,9 @@ bool					get_bool(pthread_mutex_t *mutex, bool *value);
 void					set_long(pthread_mutex_t *mutex, long *dest,
 							long value);
 long					get_long(pthread_mutex_t *mutex, long *value);
-void	write_philo_status(char *msg, t_philo *philo);
-void	de_sync_philo(t_philo *philo);
-void	ph_usleep(long time, t_table *table);
-void	increase_long(pthread_mutex_t *mutex, long *value);
+void					write_philo_status(char *msg, t_philo *philo);
+void					de_sync_philo(t_philo *philo);
+void					ph_usleep(long time, t_table *table);
+void					increase_long(pthread_mutex_t *mutex, long *value);
 
 #endif

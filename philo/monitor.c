@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 13:18:04 by mring             #+#    #+#             */
-/*   Updated: 2025/05/30 02:02:37 by mring            ###   ########.fr       */
+/*   Updated: 2025/06/02 18:08:58 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,12 @@ static bool	philo_death(t_philo *philo)
 {
 	if (philo->table->deathtime <= time_now() - get_long(&philo->philo_mtx,
 			&philo->last_meal))
+	{
+		printf("Philosopher %d died at %-6ld\n", philo->id, time_now()
+			- philo->table->sim_start);
+		set_bool(&philo->table->table_mtx, &philo->table->end_sim, true);
 		return (true);
+	}
 	return (false);
 }
 
@@ -40,12 +45,7 @@ void	*monitor(void *data)
 		while (++i < table->philo_nbr)
 		{
 			if (philo_death(table->philos + i))
-			{
-				set_bool(&table->table_mtx, &table->end_sim, true);
-				printf("Philosopher %d died\n", table->philos[i].id);
-				printf("time: %-6ld\n", time_now() - table->sim_start);
 				return (NULL);
-			}
 			if (philo_full(table->philos + i) && !table->end_sim)
 				table->full_counter += 1;
 			if (table->full_counter >= table->philo_nbr && table->meals > 0)
@@ -56,6 +56,5 @@ void	*monitor(void *data)
 		}
 		usleep(1000);
 	}
-	sleep(1);
 	return (NULL);
 }

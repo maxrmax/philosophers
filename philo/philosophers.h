@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:18:16 by mring             #+#    #+#             */
-/*   Updated: 2025/06/02 18:11:17 by mring            ###   ########.fr       */
+/*   Updated: 2025/06/04 18:17:58 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_table	t_table;
 typedef struct s_fork
 {
 	pthread_mutex_t		fork;
-	int					fork_id;
+	// int					fork_id;
 }						t_fork;
 
 // philosophers are egoistic

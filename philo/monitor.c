@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 13:18:04 by mring             #+#    #+#             */
-/*   Updated: 2025/06/04 14:17:29 by mring            ###   ########.fr       */
+/*   Updated: 2025/06/04 18:07:34 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,17 @@ void	*monitor(void *data)
 		table->full_counter = 0;
 		while (++i < table->philo_nbr)
 		{
-			if (philo_death(table->philos + i))
-				return (NULL);
 			if (philo_full(table->philos + i) && !table->end_sim)
 				table->full_counter += 1;
-			if (table->full_counter >= table->philo_nbr && table->meals > 0)
+			if (philo_death(table->philos + i)
+				|| (table->full_counter >= table->philo_nbr
+					&& table->meals > 0))
 			{
 				set_bool(&table->table_mtx, &table->end_sim, true);
 				set_bool(&table->table_mtx, &table->all_full, true);
 			}
 		}
+		usleep(200);
 	}
 	return (NULL);
 }

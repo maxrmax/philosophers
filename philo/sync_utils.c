@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 14:05:00 by mring             #+#    #+#             */
-/*   Updated: 2025/06/04 16:09:45 by mring            ###   ########.fr       */
+/*   Updated: 2025/06/04 17:58:11 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	wait_all_threads(t_philo *philo)
 			break ;
 		}
 		pthread_mutex_unlock(&philo->table->table_mtx);
-		usleep(1000);
+		usleep(100);
 	}
 }
 

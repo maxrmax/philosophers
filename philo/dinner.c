@@ -1,3 +1,4 @@
+//
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -6,7 +7,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 14:09:12 by mring             #+#    #+#             */
-/*   Updated: 2025/06/04 14:32:52 by mring            ###   ########.fr       */
+/*   Updated: 2025/06/04 18:09:15 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +15,26 @@
 
 static void	eat(t_philo *philo)
 {
+	// if (philo->id % 2 == 0)
+	// {
 	pthread_mutex_lock(&philo->first_fork->fork);
-	write_philo_status("has taken first fork", philo);
+	write_philo_status("has taken a fork", philo);
 	pthread_mutex_lock(&philo->second_fork->fork);
-	write_philo_status("has taken second fork", philo);
+	write_philo_status("has taken a fork", philo);
+	// }
+	// else
+	// {
+	// 	pthread_mutex_lock(&philo->second_fork->fork);
+	// 	write_philo_status("has taken a fork", philo);
+	// 	pthread_mutex_lock(&philo->first_fork->fork);
+	// 	write_philo_status("has taken a fork", philo);
+	// }
 	set_long(&philo->philo_mtx, &philo->last_meal, time_now());
 	philo->meals_counter++;
 	write_philo_status("is eating", philo);
 	ph_usleep(philo->table->eattime, philo->table);
 	pthread_mutex_unlock(&philo->second_fork->fork);
-	write_philo_status("has put down second fork", philo);
 	pthread_mutex_unlock(&philo->first_fork->fork);
-	write_philo_status("has put down first fork", philo);
 }
 
 static void	*dinner_sim(void *data)

@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:49:52 by mring             #+#    #+#             */
-/*   Updated: 2025/06/04 13:45:09 by mring            ###   ########.fr       */
+/*   Updated: 2025/06/04 18:21:31 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 static void	assign_forks(t_table *table, t_fork *forks, int pos)
 {
-	if (table->philos[pos].id % 2 == 0)
-	{
-		table->philos[pos].first_fork = &forks[pos];
-		table->philos[pos].second_fork = &forks[(pos + 1) % table->philo_nbr];
-	}
-	else
+	// if (table->philos[pos].id % 2 == 0)
+	// {
+	// 	table->philos[pos].first_fork = &forks[pos];
+	// 	table->philos[pos].second_fork = &forks[(pos + 1) % table->philo_nbr];
+	// }
+	// else
 	{
 		table->philos[pos].first_fork = &forks[(pos + 1) % table->philo_nbr];
 		table->philos[pos].second_fork = &forks[pos];
@@ -55,7 +55,7 @@ void	data_init(t_table *table)
 	while (++i < table->philo_nbr)
 	{
 		pthread_mutex_init(&table->forks[i].fork, NULL);
-		table->forks[i].fork_id = i;
+		// table->forks[i].fork_id = i;
 	}
 	philo_init(table, table->forks);
 }

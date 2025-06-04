@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 13:18:04 by mring             #+#    #+#             */
-/*   Updated: 2025/06/02 18:08:58 by mring            ###   ########.fr       */
+/*   Updated: 2025/06/04 14:17:29 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static bool	philo_death(t_philo *philo)
 	if (philo->table->deathtime <= time_now() - get_long(&philo->philo_mtx,
 			&philo->last_meal))
 	{
-		printf("Philosopher %d died at %-6ld\n", philo->id, time_now()
-			- philo->table->sim_start);
+		printf("%-6ld %d\033[1;31m died\033[0m\n", time_now()
+			- philo->table->sim_start, philo->id);
 		set_bool(&philo->table->table_mtx, &philo->table->end_sim, true);
 		return (true);
 	}
@@ -50,11 +50,10 @@ void	*monitor(void *data)
 				table->full_counter += 1;
 			if (table->full_counter >= table->philo_nbr && table->meals > 0)
 			{
-				set_bool(&table->table_mtx, &table->all_full, true);
 				set_bool(&table->table_mtx, &table->end_sim, true);
+				set_bool(&table->table_mtx, &table->all_full, true);
 			}
 		}
-		usleep(1000);
 	}
 	return (NULL);
 }

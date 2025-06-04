@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:43:42 by mring             #+#    #+#             */
-/*   Updated: 2025/05/30 01:32:28 by mring            ###   ########.fr       */
+/*   Updated: 2025/06/04 16:13:35 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,13 @@ long	time_now(void)
 void	ph_usleep(long time, t_table *table)
 {
 	long	start_time;
-	long	elapsed;
 
-	elapsed = 0;
 	start_time = time_now();
-	while (elapsed < time)
+	while (time_now() - start_time < time)
 	{
 		if (get_bool(&table->table_mtx, &table->end_sim))
 			return ;
-		usleep(1000);
-		elapsed = time_now() - start_time;
+		usleep(100);
 	}
 }
 

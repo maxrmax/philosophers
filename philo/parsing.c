@@ -6,13 +6,14 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:22:26 by mring             #+#    #+#             */
-/*   Updated: 2025/05/29 23:46:26 by mring            ###   ########.fr       */
+/*   Updated: 2025/06/04 13:45:49 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-// TODO: rewrite into proper atoi without exit and pre/sub functions for handling cases
+// TODO: rewrite into proper atoi without
+// exit and pre/sub functions for handling cases
 int	ft_atoi(char *s)
 {
 	int	result;

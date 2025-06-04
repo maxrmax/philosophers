@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:49:52 by mring             #+#    #+#             */
-/*   Updated: 2025/05/30 01:03:01 by mring            ###   ########.fr       */
+/*   Updated: 2025/06/04 13:45:09 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ void	data_init(t_table *table)
 	while (++i < table->philo_nbr)
 	{
 		pthread_mutex_init(&table->forks[i].fork, NULL);
-		// good for debugging apparently
-		// TODO: check if obsolete
 		table->forks[i].fork_id = i;
 	}
 	philo_init(table, table->forks);

@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 14:09:12 by mring             #+#    #+#             */
-/*   Updated: 2025/06/02 17:55:50 by mring            ###   ########.fr       */
+/*   Updated: 2025/06/04 14:32:52 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static void	eat(t_philo *philo)
 	pthread_mutex_lock(&philo->second_fork->fork);
 	write_philo_status("has taken second fork", philo);
 	set_long(&philo->philo_mtx, &philo->last_meal, time_now());
-	// TODO: double check if mutex is necessary
 	philo->meals_counter++;
 	write_philo_status("is eating", philo);
 	ph_usleep(philo->table->eattime, philo->table);
@@ -46,8 +45,6 @@ static void	*dinner_sim(void *data)
 		ph_usleep(philo->table->sleeptime, philo->table);
 		write_philo_status("is thinking", philo);
 	}
-	printf("philo end: %ld, id: %d\n", time_now() - philo->table->sim_start,
-		philo->id);
 	return (NULL);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:17:54 by mring             #+#    #+#             */
-/*   Updated: 2025/06/02 18:01:08 by mring            ###   ########.fr       */
+/*   Updated: 2025/06/04 16:27:02 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ int	main(int ac, char **av)
 		cleanup(&table);
 	}
 	else
-		error_exit("Usage: ./philo number_of_philos time_to_die time_to_eat time_to_sleep [meal_amount]");
+		error_exit("Usage: ./philo number_of_philos \
+time_to_die time_to_eat time_to_sleep [meal_amount]");
 }

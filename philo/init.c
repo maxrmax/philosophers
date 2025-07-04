@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:49:52 by mring             #+#    #+#             */
-/*   Updated: 2025/06/04 18:21:31 by mring            ###   ########.fr       */
+/*   Updated: 2025/07/04 14:13:23 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 static void	assign_forks(t_table *table, t_fork *forks, int pos)
 {
-	// if (table->philos[pos].id % 2 == 0)
-	// {
-	// 	table->philos[pos].first_fork = &forks[pos];
-	// 	table->philos[pos].second_fork = &forks[(pos + 1) % table->philo_nbr];
-	// }
-	// else
+	if (table->philos[pos].id % 2 == 0)
+	{
+		table->philos[pos].first_fork = &forks[pos];
+		table->philos[pos].second_fork = &forks[(pos + 1) % table->philo_nbr];
+	}
+	else
 	{
 		table->philos[pos].first_fork = &forks[(pos + 1) % table->philo_nbr];
 		table->philos[pos].second_fork = &forks[pos];
@@ -33,6 +33,7 @@ static void	philo_init(t_table *table, t_fork *forks)
 	i = -1;
 	while (++i < table->philo_nbr)
 	{
+		pthread_mutex_init(&table->philos[i].philo_mtx, NULL);
 		table->philos[i].id = i + 1;
 		table->philos[i].last_meal = time_now();
 		table->philos[i].meals_counter = 0;
@@ -45,12 +46,13 @@ void	data_init(t_table *table)
 {
 	int	i;
 
-	table->threads_ready = false;
+	// table->threads_ready = false;
 	table->end_sim = false;
 	table->full_counter = 0;
 	table->all_full = false;
 	table->philos = safe_malloc(sizeof(t_philo) * table->philo_nbr);
 	table->forks = safe_malloc(sizeof(t_fork) * table->philo_nbr);
+	pthread_mutex_init(&table->table_mtx, NULL);
 	i = -1;
 	while (++i < table->philo_nbr)
 	{

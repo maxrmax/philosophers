@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:18:16 by mring             #+#    #+#             */
-/*   Updated: 2025/06/04 18:17:58 by mring            ###   ########.fr       */
+/*   Updated: 2025/07/04 14:12:02 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ struct					s_table
 	// amount of philos
 	int					philo_nbr;
 	// for synchronizing philos
-	bool				threads_ready;
+	// bool				threads_ready;
 	// time stamp of sim start
 	long				sim_start;
 	// full or dead philos trigger end

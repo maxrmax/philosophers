@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:43:42 by mring             #+#    #+#             */
-/*   Updated: 2025/06/04 17:50:50 by mring            ###   ########.fr       */
+/*   Updated: 2025/10/03 17:01:38 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,6 @@ void	ph_usleep(long time, t_table *table)
 			return ;
 		usleep(100);
 	}
-}
-
-void	cleanup(t_table *table)
-{
-	int	i;
-
-	i = -1;
-	while (++i < table->philo_nbr)
-		pthread_mutex_destroy(&table->forks[i].fork);
-	free(table->philos);
-	free(table->forks);
 }
 
 void	write_philo_status(char *msg, t_philo *philo)

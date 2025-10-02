@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:18:16 by mring             #+#    #+#             */
-/*   Updated: 2025/06/04 18:17:58 by mring            ###   ########.fr       */
+/*   Updated: 2025/10/03 18:04:41 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ typedef struct s_table	t_table;
 typedef struct s_fork
 {
 	pthread_mutex_t		fork;
-	// int					fork_id;
 }						t_fork;
 
 // philosophers are egoistic
@@ -36,16 +35,12 @@ typedef struct s_fork
 // and every philo has their own ID and THREAD_ID
 typedef struct s_philo
 {
-	// philo individual id
 	int					id;
-	// how many meals eaten?
-	int					meals_counter;
-	// time passed from last mean
+	long				meals_counter;
 	long				last_meal;
 	t_fork				*first_fork;
 	t_fork				*second_fork;
 	t_table				*table;
-	// thread_id per philo[i]
 	pthread_t			thread_id;
 	pthread_mutex_t		philo_mtx;
 }						t_philo;
@@ -58,24 +53,15 @@ typedef struct s_philo
 // all hail table
 struct					s_table
 {
-	// time to sleep
 	int					sleeptime;
-	// time until death without food
 	int					deathtime;
-	// time to eaten
 	int					eattime;
-	// amount of meals everyone needs
-	int					meals;
-	//  if all philos are full
+	long				meals;
 	int					full_counter;
 	bool				all_full;
-	// amount of philos
 	int					philo_nbr;
-	// for synchronizing philos
 	bool				threads_ready;
-	// time stamp of sim start
 	long				sim_start;
-	// full or dead philos trigger end
 	bool				end_sim;
 	pthread_mutex_t		table_mtx;
 	pthread_t			monitor;
@@ -84,9 +70,7 @@ struct					s_table
 };
 
 // parsing
-int						ft_atoi(char *s);
 void					parse_input(int ac, char **av, t_table *table);
-
 void					data_init(t_table *table);
 
 // sync utils
@@ -98,8 +82,7 @@ void					dinner_start(t_table *table);
 void					*monitor(void *data);
 void					write_philo_status(char *msg, t_philo *philo);
 
-// clean exit
-void					cleanup(t_table *table);
+// exit
 void					error_exit(const char *error);
 
 // utility

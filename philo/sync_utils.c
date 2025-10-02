@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 14:05:00 by mring             #+#    #+#             */
-/*   Updated: 2025/06/04 17:58:11 by mring            ###   ########.fr       */
+/*   Updated: 2025/10/03 18:47:02 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ void	de_sync_philo(t_philo *philo)
 {
 	write_philo_status("is thinking", philo);
 	if (philo->id % 2 == 0)
-		ph_usleep(philo->table->eattime / 2, philo->table);
+		ph_usleep(philo->table->eattime / 10, philo->table);
 }
